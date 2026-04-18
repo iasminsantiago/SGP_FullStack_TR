@@ -744,3 +744,9 @@ if (usuario.isPresent()) {
     throw new Exception("Usuário não encontrado"); // trata o caso de não encontrar
 }
 ```
+
+**@Id**
+**@GeneratedValue**
+Permite usuários únicos, em sequência mesmo que aum anterior tenha sido excluido. Usa estratégia de validação, a identidade fica única, exclusiva e não se repete. 
+
+Na prática, caso eu insira um CPF para o id 2 e a pessoa morra, este id não será reutilizado. UMa nova pessoa precisa ter um novo número de id. No ramo financeiro, isso evita que uma pessoa não herde dívidas e dados de outra pessoa que já foi removida do sistema. Novos usuários entram numa fila.
