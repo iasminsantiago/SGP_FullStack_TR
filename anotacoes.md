@@ -38,10 +38,20 @@ CONTRIBUTING.md Dá regras para que outras pessoas, que olhem para meu repositor
 
 
 creative commmons (criatividade comum) é para criar conteudo de dominio publico, qualquer pessoa pode usar e nao dizer que pegou de mim.
-projeot, joao coloca MIT.
+projeto, joao coloca MIT.
+
+system.out.println - system out print LINE   system out // print line
 
 
-## CLonar repoisitorio
+sintaxe - caSa    escrever a palavra corretamente
+semantica - lagartixas voadoras sobrevoam casa -> esta correto semanticamente. // estrutura fazer sentido 
+sentido - o contexto fazer sentido ->  lagartixas voadoras sobrevoam casa  nao faz sentido.
+
+A linguagem de programacao reflete um conjunto de ordens - um algoritmo, e não é biased
+html so marca o que quero nos lugares da pagina - aqui quero um paragrafo, aqui quero um form - nao programa pois nao cria variaveis, nao cria funcoes. 
+
+
+## Clonar repoisitorio
 
 copia codigo do repo de joao no github
 
