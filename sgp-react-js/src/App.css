@@ -1,0 +1,32 @@
+.containerConteudo {
+    align-items: center;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    padding: 0;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+
+.containerPrincipal {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    height: 100hv;
+}
+
+.sgp_logo_horizontal {
+    align-self: center;
+    background-color: transparent;
+    height: 40px;
+}
+
+.sgp_logo_vertical {
+    align-self: center;
+    background-color: transparent;
+    width: 50%;
+}

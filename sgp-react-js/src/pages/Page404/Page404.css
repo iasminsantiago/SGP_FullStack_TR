@@ -1,0 +1,15 @@
+.robo_404 {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    width: 400px;
+}
+
+.texto_404 {
+    background-color: aliceblue;
+    color: #333;
+    font-size: 32;
+    margin: 20px;
+    text-align: center;
+}
