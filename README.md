@@ -199,8 +199,6 @@ SGP-API/
 ---
 
 ## Arquitetura front-end
-´´´
-## Estrutura do Front-end
 
 ```
 sgp-react-js/
