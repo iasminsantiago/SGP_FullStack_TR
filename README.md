@@ -463,18 +463,36 @@ API = localhost:8080  (o restaurante inteiro)
 
 ---
 
+### URL Base
+Parte da URL que geralmente não muda — é o endereço do servidor.
+Exemplos:
+- `http://localhost:8080`
+- `http://192.168.15.27/api/v2`
+
+> 💡 Se não informar a porta:
+> - HTTP → porta padrão é **80**
+> - HTTPS → porta padrão é **443**
+
+---
+
+### Rota
+Tudo que vem após a URL base. Define o caminho do recurso.
+Exemplos:
+- `/tarefas`
+- `/tarefas/{id}`
+- `/usuarios`
+
+Os verbos estão "dentro"/fazem parte da rota. Em usuários, temos 5 verbos possíveis, por exemplo.
+
+
+---
+
 ### Endpoint
+Combinação de URL base + rota + verbo HTTP.
+É o destino final de uma requisição.
 
 End = fim, Point = ponto — é o ponto final do caminho de uma requisição.
 
-É cada "porta de entrada" específica da API: a combinação de **verbo HTTP + rota**. É como cada prato do cardápio do restaurante.
-
-```
-GET  /projetos   → um endpoint
-POST /projetos   → outro endpoint diferente
-GET  /usuarios
-POST /login
-```
 
 `/projetos` sozinho não é um endpoint completo — é só uma rota. Para ser um endpoint, precisa do verbo:
 
