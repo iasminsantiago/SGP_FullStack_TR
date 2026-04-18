@@ -342,6 +342,26 @@ Após autenticar no Swagger (`localhost:8080/swagger-ui/index.html`), crie os se
 
 ## Glossário
 
+## Códigos de resposta HTTP
+
+| Código | Nome | Significa |
+|---|---|---|
+| 200 | OK | Requisição bem-sucedida |
+| 201 | Created | Recurso criado com sucesso |
+| 204 | No Content | Sucesso, sem conteúdo pra retornar (ex: DELETE) |
+| 400 | Bad Request | Requisição inválida — dados incorretos ou faltando |
+| 401 | Unauthorized | Não autenticado — precisa fazer login |
+| 403 | Forbidden | Autenticado, mas sem permissão pra acessar |
+| 404 | Not Found | Recurso não encontrado |
+| 500 | Internal Server Error | Erro no servidor |
+
+> 💡 Diferença entre 401 e 403:
+> - **401** = você não está logado
+> - **403** = você está logado, mas não tem permissão
+
+
+---
+
 ### Node.js e NVM
 
 **Node.js** é o programa em si — o runtime necessário para rodar o front-end.
