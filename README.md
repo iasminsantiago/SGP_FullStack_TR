@@ -425,6 +425,9 @@ Após autenticar no Swagger (`localhost:8080/swagger-ui/index.html`), crie os se
 }
 ```
 
+Lembrete: ao usar o site (localhost:3000), caso não consiga logar ou criar alguma tarefa/usuário/projeto, verificar se seu token já expirou. caso prefira, pode excluir o token expirado de local storage (f12 - Application  - Local Storage - entrar em http://localhost:3000 e excluir o usuário, depois reautenticar através do swagger
+<img width="1052" height="470" alt="image" src="https://github.com/user-attachments/assets/786441ef-db86-4620-9537-c1cd5e8231e7" />
+
 ---
 
 ## Glossário
