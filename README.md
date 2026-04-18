@@ -1,6 +1,8 @@
 # SGP — Sistema de Gestão de Projetos
 
 Sistema full stack para gestão de projetos, tarefas e usuários, desenvolvido com Java + Spring Boot no back-end e React no front-end.
+<img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/d7ef8a69-b205-4c32-b76b-9180c814f683" />
+<img width="1902" height="1017" alt="image" src="https://github.com/user-attachments/assets/150f51c4-681f-4cfb-972c-bd641961a630" />
 
 ---
 
@@ -392,6 +394,8 @@ const resposta = await fetch("http://localhost:8080/tarefas", {
 ---
 
 ## Teste de usabilidade
+
+
 
 Após autenticar no Swagger (`localhost:8080/swagger-ui/index.html`), crie os seguintes registros:
 
