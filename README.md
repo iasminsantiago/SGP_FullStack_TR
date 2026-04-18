@@ -88,6 +88,21 @@ Acesse: `http://localhost:3000`
 
 ---
 
+## O que não está no repositório
+
+Alguns arquivos e pastas são ignorados pelo `.gitignore` e **não sobem para o GitHub** — isso é intencional.
+
+| O que | Por quê não sobe |
+|-------|-----------------|
+| `node_modules/` | Milhares de arquivos pesados gerados pelo `npm install` — qualquer um recria rodando `npm install` |
+| `target/` | Pasta de build do Maven, gerada automaticamente pelo `./mvnw spring-boot:run` |
+| `*.class` | Arquivos compilados do Java, gerados na build |
+| `.env` | Pode conter senhas e segredos — nunca deve ser versionado |
+
+Ao clonar o projeto, basta seguir as instruções da seção [Como rodar](#como-rodar) e essas dependências serão recriadas automaticamente.
+
+---
+
 ## Endpoints da API
 
 > ⚠️ Todas as rotas abaixo exigem autenticação via token JWT, exceto `/login`.
