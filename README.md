@@ -391,6 +391,35 @@ Quando o usuário faz novas requisições, o front já guardou o token e o envia
 
 ---
 
+### Fluxo de dados
+
+Front faz requisição
+
+↓
+
+Controller recebe e chama o Service
+
+↓
+
+Service aplica a lógica e acessa o banco via Repository
+
+↓
+
+Repository executa a query no banco
+
+↓
+
+Dados sobem: Repository → Service → Controller
+
+↓
+
+Controller entrega a resposta em JSON pro front
+
+
+O Controller recebe a requisição do front, chama o Service e retorna a resposta — no caso de uma API REST, essa resposta é entregue em formato JSON automaticamente pelo Spring.
+
+
+---
 ### Controllers
 
 Na pasta `controllers`, as classes `ProjetoController`, `UsuarioController` e `TarefaController` cuidam do CRUD — criar, listar, editar e deletar dados.
@@ -415,7 +444,7 @@ Classe que limita quais dados são transferidos numa operação — tanto do fro
 
 **LoginRequestDTO** — do front para o back. Quando o usuário faz login, o front envia apenas email e senha. Essa classe é usada nos controllers via `@RequestBody`, que pega o JSON da requisição e transforma no objeto DTO para autenticar o usuário e gerar o token JWT.
 
-**UsuarioResponseDTO** — do back para o front. Se o front pede para listar dados de um usuário — que tem nome, CPF, senha e data de criação no banco — o back retorna apenas nome e email, sem expor a senha e outros dados sensíveis.
+**UsuarioResponseDTO** — do back para o front. Se o front pede para listar dados de um usuário — que tem nome, CPF, senha e data de criação no banco — o back retorna apenas nome e email, sem expor a senha e outros dados sensíveis. Mas se o Controller já define o que retorna, um DTO de resposta seria redundante nesse projeto, por isso não criamos tal função. 
 
 **Fluxo front → back:**
 
@@ -428,6 +457,13 @@ LoginRequestDTO carrega só esses dois campos
            ↓
 Service valida no banco e gera o token JWT
 ```
+
+---
+
+### Service
+
+O Service contém a lógica de negócio e faz a ponte entre o Controller e recursos externos, como o banco de dados, APIs externas, ou outros serviços. Ele processa as regras e busca ou salva os dados necessários.
+Exemplo: Se o usuário pede o preço de um sapato, o controller pede ao service para buscar, no banco de dados, o preço deste e retorna um JSON com a informação (API REST).
 
 ---
 
