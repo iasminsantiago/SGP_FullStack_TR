@@ -9,6 +9,7 @@ apagar target ou biuld (construir) ou dist (distribuir)
 
 apaga pelo windows mesmo ou rm -rf target  (no linux e amc)
 
+--- 
 
 joao el paragrafo de 5 a 6 linhas, por pratica, nao é leitura que fixa mas universal. l
 a leitura transversal fixa
@@ -20,6 +21,7 @@ subir degrau aos poucos é mehor que tentar voar.
 
 joao comecou com redes, e depois foi pra front e back. 
 
+---
 
 O que a pessoa não ver aqui, com,o converter para  https, ele pode fazer pull request.
 
@@ -32,13 +34,14 @@ A empresa contrata quem resolve rpoblema, pois ele resolve problema em dinheiro.
 Quando compartilho como faço, compartilho como resolvo problema.
 
 
-
 CONTRIBUTING.md Dá regras para que outras pessoas, que olhem para meu repositorio e quiserem contirbuir com ele, consigam tarbalhar.
 
-
+---
 
 creative commmons (criatividade comum) é para criar conteudo de dominio publico, qualquer pessoa pode usar e nao dizer que pegou de mim.
 projeto, joao coloca MIT.
+
+---
 
 system.out.println - system out print LINE   system out // print line
 
@@ -65,7 +68,16 @@ git clone url-colada-aqui
 <img width="1205" height="365" alt="image" src="https://github.com/user-attachments/assets/74192ee8-32a3-4b57-81c1-7d1d664250a4" />
 
 
+## fluxo github
 
+commit = carimbar pra dizer pra onde vai
+
+git init / git clone // git init é eu nao ter repo ainda no github, e eu criar na minha maquina um diretorio e digo pra inciar como repo git, ele cria o ".git" mas tenho que dizer pra onde ele vai, ai digo:   git remote add origin url 
+git add .   // adiciona na caixa dos correios pra enviar a algum ligar depois.
+git commit -m " "  // botou a etiqueta, pois ja coloquei as alteracoes na xcaixa e selei a caixa e agora coloqeui o destino.
+git push origin branch-onde-colocarei-meu-codigo  ->  git push origin main // enviar pra local que eu informar   origin é o repo de onde eu baixei. 
+
+---
 ## Funcionalidades
 
 - Login com autenticação via token JWT
