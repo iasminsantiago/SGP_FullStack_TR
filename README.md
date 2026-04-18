@@ -255,6 +255,10 @@ sgp-react-js/
 ### Back-end
 
 **`SecurityConfig.java`**
+— adicionamos `http.cors(...)`
+O Spring Security estava sobrescrevendo as configurações de CORS,
+bloqueando as requisições do front mesmo com o CorsConfig correto.
+Adicionamos essa linha para integrar o CORS ao Spring Security.
 
 ```java
 // Antes
@@ -266,6 +270,11 @@ http.cors(cors -> cors.configure(http))
 ```
 
 **`CorsConfig.java`**
+— adicionamos `http://localhost:3000`
+- Configurado CORS para aceitar requisições da porta 3000
+O front React roda na porta 3000. Sem liberar essa origem,
+o navegador bloqueava todas as requisições do front pro back
+com erro de CORS policy.
 
 ```java
 // Antes
@@ -276,6 +285,11 @@ http.cors(cors -> cors.configure(http))
 ```
 
 **`Projeto.java`**
+— adicionamos `@JsonIgnore`
+Projeto tem uma lista de Tarefas, e cada Tarefa tem um Projeto dentro.
+Isso causava um loop infinito na hora de converter pra JSON,
+quebrando a aplicação. O @JsonIgnore interrompe esse ciclo
+ignorando a lista de tarefas na serialização.
 
 ```java
 // Antes
@@ -291,22 +305,47 @@ private List tarefas;
 ### Front-end
 
 **`Atividades.js` — estado inicial**
+ — corrigido `list` → `lista`
+O estado foi inicializado como `list` mas usado como `lista`
+no restante do código, causando erro silencioso onde a tabela
+aparecia vazia mesmo com dados.
 
+**Antes:**
 ```javascript
-// Antes
-this.state = { list: [], carregando: true, erro: null };
-
-// Depois
-this.state = { lista: [], carregando: true, erro: null };
+this.state = {
+    list: [],
+    carregando: true,
+    erro: null,
+};
 ```
 
-**`Atividades.js` — fetch com autenticação**
-
+**Depois:**
 ```javascript
-// Antes
-const resposta = await fetch("http://localhost:8080/api/atividades");
+this.state = {
+    lista: [],
+    carregando: true,
+    erro: null,
+};
+```
 
-// Depois
+
+**`Atividades.js` — corrigida URL e adicionado token JWT**
+— corrigida URL
+A URL original `/api/atividades` não existia no back-end.
+A rota correta é `/tarefas`.
+
+Todas as rotas exceto `/login` exigem autenticação.
+Sem enviar o token no header `Authorization: Bearer`,
+o back retornava erro 403 Forbidden.
+#### `Atividades.js` — corrigida URL e adicionado token JWT
+
+**Antes:**
+```javascript
+const resposta = await fetch("http://localhost:8080/api/atividades");
+```
+
+**Depois:**
+```javascript
 const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 const token = usuario?.token;
 
@@ -315,6 +354,7 @@ const resposta = await fetch("http://localhost:8080/tarefas", {
 });
 ```
 
+
 **Arquivos criados no front-end além do projeto original:**
 - `Usuarios.js` — listagem de usuários
 - `Projetos.js` — listagem de projetos
@@ -322,16 +362,10 @@ const resposta = await fetch("http://localhost:8080/tarefas", {
 - `ProjetoForm.js` — formulário de cadastro de projeto pelo site
 - `TarefaForm.js` — formulário de cadastro de tarefa pelo site
 
-Correções realizadas:
-- Corrigido bug de estado `list` → `lista` em `Atividades.js`
-- Corrigido URL de `/api/atividades` → `/tarefas`
-- Adicionado envio de token JWT nas requisições do front
-- Adicionado `@JsonIgnore` em `Projeto.java` para evitar loop infinito no JSON
-- Configurado CORS para aceitar requisições da porta 3000
+
 ---
 
 ## Melhorias futuras
-
 - Edição e exclusão de projetos, tarefas e usuários pela interface web (atualmente só via Swagger)
 - Persistência com MySQL em produção
 - Tela de recuperação de senha
