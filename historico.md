@@ -1,25 +1,44 @@
 # SGP_FullStack_TR
 Projeto full stack de gerenciador de projetos por usuário, usando Java + React e JS + React.
 
+Arquivos env (No .gitignore) geralmente nao sao enviados ao git, potr ter configurações de segurança.
 
-# SGP — Sistema de Gestão de Projetos
 
-Sistema full stack para gestão de projetos, tarefas e usuários.
+O target nao vai pro git pois tem os arquivos class, que quando eu for rodar, serao gerados de qualqeur firma
+apagar target ou biuld (construir) ou dist (distribuir)
 
-## Tecnologias
+apaga pelo windows mesmo ou rm -rf target  (no linux e amc)
 
-**Back-end**
-- Java 17
-- Spring Boot
-- Spring Security
-- JWT (JSON Web Token)
-- JPA / Hibernate
-- Banco H2 (em memória) — configurável para MySQL
 
-**Front-end**
-- React
-- Bootstrap 5
-- Chart.js
+joao el paragrafo de 5 a 6 linhas, por pratica, nao é leitura que fixa mas universal. l
+a leitura transversal fixa
+
+quem e ro amnce le letra por eltra. livro tecnico e livro de referenica. entendo masi ou emnos a forma em que as cosias estao. vai so onde voce quer. ele pegou livro de 2000 aoginas e leu em 2 dias e so sabe do qeu trta, so sabendo onde ele vai pra aprender algo, ele nao le como romance, palavra por palavra. 
+
+subir degrau funciona pra todo mundo. tem quem comeca programaco e quer criar sistema. se voce vai escalando devargazinho, voce vai dizando. como lerei e execcitarei e transitarei da eoria pra pratica.
+subir degrau aos poucos é mehor que tentar voar. 
+
+joao comecou com redes, e depois foi pra front e back. 
+
+
+O que a pessoa não ver aqui, com,o converter para  https, ele pode fazer pull request.
+
+Caso esteja, então a pessoa sabe que eu ainda farei.
+
+Genio nao resolve problema, tende a dizer que sabe muito. 
+
+A empresa contrata quem resolve rpoblema, pois ele resolve problema em dinheiro.
+
+Quando compartilho como faço, compartilho como resolvo problema.
+
+
+
+CONTRIBUTING.md Dá regras para que outras pessoas, que olhem para meu repositorio e quiserem contirbuir com ele, consigam tarbalhar.
+
+
+
+
+
 
 ## Funcionalidades
 
