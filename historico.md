@@ -41,6 +41,18 @@ creative commmons (criatividade comum) é para criar conteudo de dominio publico
 projeot, joao coloca MIT.
 
 
+## CLonar repoisotiro
+
+copia codigo do repo de joao no github
+
+git clone url-colada-aqui
+
+// ele cirará diretorio/pasta novo no windoes, dentro do diretorio qeu informei no cmd
+
+// o .git que aparecerá no link colado é ref. a ser um diretorio
+
+// copia
+
 
 
 ## Funcionalidades
