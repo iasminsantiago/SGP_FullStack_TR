@@ -310,17 +310,16 @@ O estado foi inicializado como `list` mas usado como `lista`
 no restante do código, causando erro silencioso onde a tabela
 aparecia vazia mesmo com dados.
 
-**Antes:**
 ```javascript
+// Antes
 this.state = {
     list: [],
     carregando: true,
     erro: null,
 };
-```
 
-**Depois:**
-```javascript
+
+// Depois
 this.state = {
     lista: [],
     carregando: true,
@@ -339,13 +338,11 @@ Sem enviar o token no header `Authorization: Bearer`,
 o back retornava erro 403 Forbidden.
 #### `Atividades.js` — corrigida URL e adicionado token JWT
 
-**Antes:**
 ```javascript
+// Antes
 const resposta = await fetch("http://localhost:8080/api/atividades");
-```
 
-**Depois:**
-```javascript
+// Depois
 const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 const token = usuario?.token;
 
