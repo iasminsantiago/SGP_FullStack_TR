@@ -263,13 +263,19 @@ const resposta = await fetch("http://localhost:8080/tarefas", {
 });
 ```
 
-**Novos arquivos criados:**
-- `Usuarios.js`
-- `Projetos.js`
-- `UsuarioForm.js`
-- `ProjetoForm.js`
-- `TarefaForm.js`
+**Arquivos criados no front-end além do projeto original:**
+- `Usuarios.js` — listagem de usuários
+- `Projetos.js` — listagem de projetos
+- `UsuarioForm.js` — formulário de cadastro de usuário pelo site
+- `ProjetoForm.js` — formulário de cadastro de projeto pelo site
+- `TarefaForm.js` — formulário de cadastro de tarefa pelo site
 
+Correções realizadas:
+- Corrigido bug de estado `list` → `lista` em `Atividades.js`
+- Corrigido URL de `/api/atividades` → `/tarefas`
+- Adicionado envio de token JWT nas requisições do front
+- Adicionado `@JsonIgnore` em `Projeto.java` para evitar loop infinito no JSON
+- Configurado CORS para aceitar requisições da porta 3000
 ---
 
 ## Melhorias futuras
@@ -277,7 +283,6 @@ const resposta = await fetch("http://localhost:8080/tarefas", {
 - Edição e exclusão de projetos, tarefas e usuários pela interface web (atualmente só via Swagger)
 - Persistência com MySQL em produção
 - Tela de recuperação de senha
-- Criar `UsuarioResponseDTO` para não expor campos sensíveis (como senha) nas respostas da API
 
 ---
 
