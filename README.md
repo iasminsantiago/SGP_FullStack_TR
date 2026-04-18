@@ -349,7 +349,7 @@ Correções realizadas:
 - [ ] `GET /usuarios` retorna lista
 - [ ] `GET /projetos` retorna lista
 - [ ] `POST /usuarios` cria novo usuário
-- [ ] Console H2 abre em `localhost:8080/h2-console`
+- [ ] Console H2 abre em `localhost:8080/h2-console`. Usar login, usuário e senha informados no arquivo pom.xml.
 
 ### Front-end
 - [ ] Sobe sem erros (`npm run start`)
