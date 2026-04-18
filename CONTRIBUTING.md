@@ -1,10 +1,46 @@
-Dá regras para que outras pessoas, que olhem para meu repositorio e quiserem contirbuir com ele, consigam tarbalhar.
+# CONTRIBUTING.md
 
-Para contribuir, clone o repositório.
-Depois de clonar, rode o mpn install
-Abra com VSCode
+# Como contribuir com o SGP
 
-Envie via pull request para madner de sua amáquina para meu repositório. Aceitando, seu código entra no meu, e aparece no código final.
-Caso não contribua, informo que não desejo que contribuam.
+Obrigada pelo interesse em contribuir! Siga as instruções abaixo.
 
+## Pré-requisitos
+- Java 17+
+- Node.js
+- Maven
+- Git
 
+## Como rodar o projeto localmente
+Veja o [README.md](README.md) para instruções completas.
+
+## Como contribuir
+
+### 1. Fork o repositório
+Clique em **Fork** no canto superior direito do GitHub.
+
+### 2. Crie uma branch
+```bash
+git checkout -b minha-feature
+```
+
+### 3. Faça suas alterações
+- Siga o padrão de código já existente
+- Separe responsabilidades — cada classe tem uma função só
+- Não commite código comentado desnecessariamente
+
+### 4. Commit suas alterações
+```bash
+git commit -m "feat: descrição do que foi feito"
+```
+
+### 5. Abra um Pull Request
+Descreva o que foi alterado e por quê.
+
+## Padrão de commits
+| Prefixo | Quando usar |
+|---|---|
+| `feat:` | Nova funcionalidade |
+| `fix:` | Correção de bug |
+| `docs:` | Alteração em documentação |
+| `refactor:` | Refatoração de código |
+| `style:` | Formatação, sem mudança de lógica |
