@@ -1,10 +1,8 @@
-# SGP_FullStack_TR
-Projeto full stack de gerenciador de projetos por usuário, usando Java + React e JS + React.
-
-
 # SGP — Sistema de Gestão de Projetos
 
-Sistema full stack para gestão de projetos, tarefas e usuários.
+Sistema full stack para gestão de projetos, tarefas e usuários, desenvolvido com Java + Spring Boot no back-end e React no front-end.
+
+---
 
 ## Tecnologias
 
@@ -21,63 +19,136 @@ Sistema full stack para gestão de projetos, tarefas e usuários.
 - Bootstrap 5
 - Chart.js
 
+---
+
 ## Funcionalidades
 
-- Login com autenticação via token JWT
+- Autenticação via token JWT
 - Dashboard com gráficos
-- Listagem, cadastro de projetos
-- Listagem, cadastro de tarefas
-- Listagem, cadastro de usuários
-- API REST protegida — todas as rotas exigem autenticação exceto login
+- Listagem e cadastro de projetos
+- Listagem e cadastro de tarefas
+- Listagem e cadastro de usuários
+- API REST protegida — todas as rotas exigem autenticação, exceto `/login`
+
+---
 
 ## Como rodar
 
+> Rodar o **back-end primeiro** — o front depende da API em `localhost:8080`. Se o back não estiver no ar, o login falha com erro de conexão.
+
 ### Back-end
+
+Verifique o ambiente:
 ```bash
-.\mvnw spring-boot:run
+java -version
+javac -version
+mvn --version
 ```
+
+Na pasta do back-end, execute:
+```bash
+./mvnw spring-boot:run
+```
+
 Acesse: `http://localhost:8080/swagger-ui/index.html`
 
 ### Front-end
+
+Verifique o ambiente:
+```bash
+node -v
+npm -v
+```
+
+Na pasta do front-end, execute:
 ```bash
 npm install
 npm run start
 ```
+
 Acesse: `http://localhost:3000`
 
+---
+
 ## Credenciais padrão
-Email: admin@sgp.com
-Senha: 123456
+
+> ⚠️ Use apenas em ambiente de desenvolvimento. Nunca suba essas credenciais para produção.
+
+| Campo | Valor         |
+|-------|---------------|
+| Email | admin@sgp.com |
+| Senha | 123456        |
+
+---
 
 ## Observações
-- O banco H2 é reiniciado a cada vez que o back sobe — os dados não persistem
-- Para usar MySQL, alterar as configurações em `application.properties`
 
-## Melhorias futuras
-- Edição e exclusão de projetos, tarefas e usuários pelo site
-- Persistência com MySQL em produção
-- Tela de recuperação de senha
+- O banco H2 é reiniciado a cada vez que o back sobe — os dados não persistem entre sessões.
+- Para usar MySQL, altere as configurações em `application.properties`.
 
+---
 
+## Endpoints da API
 
-## Arquitetura
-```md
+> ⚠️ Todas as rotas abaixo exigem autenticação via token JWT, exceto `/login`.
+
+### Autenticação
+
+| Método | Endpoint | O que faz |
+|--------|----------|-----------|
+| POST | `/login` | Realiza login e retorna token JWT |
+
+### Projetos `/projetos`
+
+| Método | Endpoint         | O que faz                    |
+|--------|------------------|------------------------------|
+| GET    | `/projetos`      | Lista todos os projetos      |
+| GET    | `/projetos/{id}` | Busca projeto pelo id        |
+| POST   | `/projetos`      | Cria novo projeto            |
+| PUT    | `/projetos/{id}` | Atualiza projeto pelo id     |
+| DELETE | `/projetos/{id}` | Deleta projeto pelo id       |
+
+### Usuários `/usuarios`
+
+| Método | Endpoint         | O que faz                    |
+|--------|------------------|------------------------------|
+| GET    | `/usuarios`      | Lista todos os usuários      |
+| GET    | `/usuarios/{id}` | Busca usuário pelo id        |
+| POST   | `/usuarios`      | Cria novo usuário            |
+| PUT    | `/usuarios/{id}` | Atualiza usuário pelo id     |
+| DELETE | `/usuarios/{id}` | Deleta usuário pelo id       |
+
+### Tarefas `/tarefas`
+
+| Método | Endpoint        | O que faz                   |
+|--------|-----------------|-----------------------------|
+| GET    | `/tarefas`      | Lista todas as tarefas      |
+| GET    | `/tarefas/{id}` | Busca tarefa pelo id        |
+| POST   | `/tarefas`      | Cria nova tarefa            |
+| PUT    | `/tarefas/{id}` | Atualiza tarefa pelo id     |
+| DELETE | `/tarefas/{id}` | Deleta tarefa pelo id       |
+
+---
+
+## Arquitetura back-end
+
+```
 SGP-API/
 └── src/main/java/br/com/trein.../
     ├── config/
-    │   ├── CorsConfig.java          # Configura quem pode acessar a API (CORS)
+    │   ├── CorsConfig.java          # Configura origens permitidas (CORS)
     │   ├── DataInitializer.java     # Cria usuário admin automático ao iniciar
     │   ├── OpenApiConfig.java       # Configurações do Swagger
-    │   └── SecurityConfig.java      # Protege as rotas, libera só login e Swagger
+    │   └── SecurityConfig.java      # Protege as rotas, libera login e Swagger
     │
     ├── controllers/
-    │   ├── AuthController.java      # Rota de login, gera o token JWT
+    │   ├── AuthController.java      # Rota de login — gera o token JWT
     │   ├── ProjetoController.java   # CRUD de projetos
     │   ├── TarefaController.java    # CRUD de tarefas
     │   └── UsuarioController.java   # CRUD de usuários
     │
     ├── dto/
-    │   ├── LoginRequestDTO.java     # Recebe email e senha do front no login
+    │   ├── LoginRequestDTO.java     # Recebe email e senha no login
     │   ├── ProjetoDTO.java          # Dados transferidos de projeto
     │   ├── TarefaDTO.java           # Dados transferidos de tarefa
     │   └── UsuarioDTO.java          # Dados transferidos de usuário
@@ -107,316 +178,121 @@ SGP-API/
     │   ├── StatusTarefa.java        # Enum de status da tarefa
     │   └── StatusUsuario.java       # Enum de status do usuário
     │
-    └── SgpApplication.java          # Classe principal, inicia a aplicação
+    └── SgpApplication.java          # Classe principal — inicia a aplicação
 ```
 
+---
 
-## Endpoints da API - SGP
-
-### Projetos `/projetos`
-
-| Método | Endpoint | O que faz |
-|---|---|---|
-| GET | `/projetos` | Lista todos os projetos |
-| GET | `/projetos/{id}` | Busca 1 projeto pelo id |
-| POST | `/projetos` | Cria novo projeto |
-| PUT | `/projetos/{id}` | Atualiza um projeto pelo id |
-| DELETE | `/projetos/{id}` | Deleta um projeto pelo id |
-
-### Usuários `/usuarios`
-
-| Método | Endpoint | O que faz |
-|---|---|---|
-| GET | `/usuarios` | Lista todos os usuários |
-| GET | `/usuarios/{id}` | Busca 1 usuário pelo id |
-| POST | `/usuarios` | Cria novo usuário |
-| PUT | `/usuarios/{id}` | Atualiza um usuário pelo id |
-| DELETE | `/usuarios/{id}` | Deleta um usuário pelo id |
-
-### Tarefas `/tarefas`
-
-| Método | Endpoint | O que faz |
-|---|---|---|
-| GET | `/tarefas` | Lista todas as tarefas |
-| GET | `/tarefas/{id}` | Busca 1 tarefa pelo id |
-| POST | `/tarefas` | Cria nova tarefa |
-| PUT | `/tarefas/{id}` | Atualiza uma tarefa pelo id |
-| DELETE | `/tarefas/{id}` | Deleta uma tarefa pelo id |
-
-
-
-### Autenticação `/login`
-
-| Método | Endpoint | O que faz |
-|---|---|---|
-| POST | `/login` | Realiza login e retorna token JWT |
-
-> ⚠️ Todas as rotas exceto `/login` exigem autenticação via token JWT.
-
-## Conceitos
-
-Node.js — é o programa em si, o que você precisa pra rodar o front.
-
-NVM — Node Version Manager — é um gerenciador que permite ter várias versões do Node instaladas e trocar entre elas.
-
-
-### API 
-é o sistema inteiro - é o back-end que construimos em Spring Boot. 
-```API = localhost:8080```  (o restaurante inteiro)
-
-### Endpoint 
-End = fim, Point = ponto — ponto final do caminho.
-é cada "porta de entrada" específica da API - é a combinação de verbo + rota. É como cada prato do cardápio do restaurante.
-```
-Endpoints = cada rota disponível (os pratos)
-GET  /projetos
-POST /projetos
-GET  /usuarios
-POST /login
-...
-```
-
-É literalmente o destino final da requisição:
-
-```
-localhost:8080  +  /projetos  +  GET
-     │                │             │
-  endereço          caminho       ação
-  do servidor       (endpoint)
-```
-
-API = a cidade inteira
-Endpoint = o endereço específico que você quer chegar
-Verbo HTTP = o que você vai fazer lá (buscar, entregar, deletar)
-
-
-Logo, /projetos sozinho não é um endpoint completo, e só uma rota. 
-Para ser endpoint, precisa do verbo:
-
-GET /projetos → um endpoint
-POST /projetos → outro endpoint diferente
-
-
-### JWT 
-JSON Web Token é um formato de token gerado pelo servidor no momento do login. Ele carrega as informações do usuário e tem prazo de validade. Quando o usuário faz novas requisições, o front já guardou o token e o envia pro back, pra provar que o usuário já está autenticado, sem precisar informar a senha novamente a cada requisição.
-
-
-Na pasta Controllers, ProjetoController, UsuarioController, TarefaController Cuidam do CRUD — criar, listar, editar, deletar dados.
-
-### AuthController
-Cuida só do login — recebe email e senha, valida no banco, e gera o token JWT.
-
-A diferença principal é que o AuthController é a porta de entrada do sistema — é a única rota que não precisa de token pra ser acessada. Todas as outras rotas exigem autenticação.
-<br />
-
-
-### DTO
-```md
-dto/
-├── LoginRequestDTO.java
-└── UsuarioResponseDTO.java
-```
-Data Transfer Object é uma classe que limita quais dados são transferidos numa operação, tanto do front para o back quanto do back para o front. 
-
-Por exemplo, no login, o LoginRequestDTO define que o front manda só email e senha para o back. Essa classe é chamada no controller através da annotation @RequestBody, que pega os dados do JSON da requisição e transforma no objeto DTO — que então é usado para autenticar o usuário e gerar o token JWT.
-
-LoginRequestDTO - do front para o back. Quando realizamos login no site, front só envia e-mail e senha pro back.
-Ele é usado nos controllers através do @RequestBody, que pega o JSON da requisição e transforma no objeto DTO.
-
-UsuarioResponseDTO - do back para o front. Se peço para listar dados do usuário ao back - que tem isso e nome, cpf, senha  e data de criação no banco - o back enviará somente nome e e-mail para o front, não revelará a senha e outros dados sensíveis. 
-
-Fluxo front para back: 
-
-
-Front manda JSON com email e senha
-
-
-↓
-
-AuthController recebe usando @RequestBody LoginRequestDTO
-
-↓
-
-LoginRequestDTO carrega só esses dois campos
-
-↓
-
-*Service valida no banco e gera o token JWT*
-
-
-
-### config 
-Pensando em LGPD e segurança, protegemos a maioria das rotas. 
-Na pasta config, usamos o SecurityConfig para limitar as rotas acessíveis. 
-Liberamos o login e o Swagger — se não, ninguém conseguiria logar nem testar a aplicação. Qualquer outra rota exige um token JWT, que é gerado após o login.
-
-```.anyRequest().authenticated() ```
-
-Antes de qualquer requisição, o JwtFilter intercepta e valida o token. Se for inválido ou não existir, barra a requisição:
-```.addFilterBefore(jwtFilter, ...)```
-
-
-No projeto aparece assim:
-
-Você abre localhost:8080 sem estar autenticado
-
-O SecurityConfig barra a requisição
-
-O servidor responde 403 Forbidden - "você não tem permissão pra acessar isso"
-
-
-
-
-## Annotations
-
-### @PathVariable pega um valor que está dentro da URL e passa pra dentro do método.
-```java
-@GetMapping("/usuarios/{id}")
-public Usuario buscar(@PathVariable Long id) {
-    return repository.findById(id);
-}
-```
-Se você acessar /usuarios/5, o {id} da URL vai ser capturado pelo @PathVariable e o método vai buscar o usuário de id 5.
-
-
-</br>
-### @RequestBody pega os dados que vieram no corpo da requisição - quando o front manda um JSON com os dados do projeto, o Spring pega esse JSON e transforma no objeto Projeto.
-
-```java
-@PostMapping
-public Projeto salvar(@RequestBody Projeto projeto) {
-    return service.salvar(projeto);
-}
-```
-no ProjetoController, quando o front manda um POST pra criar um projeto, ele manda um JSON no corpo assim:
-
-```json
-json{
-    "nome": "Projeto X",
-    "descricao": "..."
-}
-```
-E o @RequestBody captura esse JSON e transforma no objeto Projeto.
-
-</br>
-
-@GetMapping GET - Buscar dados
-
-@PostMapping - POST - Criar dados
-
-@PutMapping - PUT - Editar dados
-
-@DeleteMapping - DELETE - Deletar dados
-
-```java
-@GetMapping("/projetos")
-public List<Projeto> listar() { ... }
-// acessa: GET localhost:8080/projetos
-
-
-@PostMapping("/projetos")
-public Projeto salvar(@RequestBody Projeto projeto) { ... }
-// acessa: POST localhost:8080/projetos
-```
-@GetMapping("/projetos") = quando alguém fizer um GET nesse endereço, executa o  método "listar" 
-@PostMapping("/projetos") = quando alguém fizer um POST nesse endereço, executa esse método "salvar"
-
-
-
-### Optional
-serve pra evitar erro de NullPointerException, que é quando você tenta usar um objeto que não existe.
-
-Exemplo sem Optional:
-```java
-Usuario usuario = repository.findByEmail("joao@email.com");
-usuario.getNome(); // ERRO se não encontrar o usuário — ele é null
-```
-
-Exemplo com Optional:
-```java
-Optional<Usuario> usuario = repository.findByEmail("joao@email.com");
-
-if(usuario.isPresent()) {
-    // encontrou o usuário, pode usar
-    usuario.get().getNome();
-} else {
-    // não encontrou, trata o erro
-    throw new Exception("Usuário não encontrado");
-}
-```
-
-
-## Instruções para o usuário:
-
-Assumindo que você tem os seguintes aplicativos instalados: Java, Maven, Gradle, Node.JS, VS Code, VSCode, seguimos para rodagem do programa.
-
-### Rodar o back primeiro:
-O front depende do back - quando você loga no front, ele faz uma requisição pra localhost:8080. 
-Se o back não estiver rodando, o login falha e dá erro de conexão.
-
-#### Rodando o back-end
-teste o ambiente no cmd:
-```
-
-    java -version
-    javac -version
-    mvn --version
-    gradle --version
-```
-
-abra a pasta do back-end e, num novo terminal, execute
-```nvmw spring-boot:run ``` 
-ou
-```nvm spring-boot:run```
-
-Como nosso programa tem restrições de acesso, acesse http://localhost:8080/swagger-ui/index.html e informe login e senha  válidos em auto-controller -> /POST Login. 
-Copie o token e cole em Authorize, para começar a testar os endpoints.
-
-
-#### Rodando o front-end
-teste o ambiente np cmd:
-nvm -version
-npm -v
-node -v
-
-Abra a pasta do front-end na IDE e rode
-```npm install```
-e depois
-```npm run start```para rodar nosso site.
-
-Acesse localhost:3000  para realizar login e usar o programa.
-
-
-
-## Demonstração ao vivo 
+## Mudanças em relação ao projeto original
 
 ### Back-end
-- Roda sem erro no terminal
--  localhost:8080 retorna 403 ✅ (segurança funcionando) -> antes de logar, tenta acessar uma rota protegida e mostra o 403. Isso prova que a segurança tá funcionando. 
-- API funcionando:  Swagger abre em localhost:8080/swagger-ui/index.html
-—  Swagger abre em localhost:8080/swagger-ui/index.html
-- Login funciona com o usuário do DataInitializer - Token é gerado após o login
-- Autoriza no Swagger com o token
-- GET /usuarios retorna a lista
-- GET /projetos retorna a lista
-- POST /usuarios cria um novo usuário
-- H2 console abre em localhost:8080/h2-console
+
+**`SecurityConfig.java`**
+
+```java
+// Antes
+http.csrf(csrf -> csrf.disable())
+
+// Depois
+http.cors(cors -> cors.configure(http))
+    .csrf(csrf -> csrf.disable())
+```
+
+**`CorsConfig.java`**
+
+```java
+// Antes
+.allowedOrigins("http://localhost:5173")
+
+// Depois
+.allowedOrigins("http://localhost:5173", "http://localhost:3000")
+```
+
+**`Projeto.java`**
+
+```java
+// Antes
+@OneToMany(mappedBy = "projeto")
+private List tarefas;
+
+// Depois
+@JsonIgnore
+@OneToMany(mappedBy = "projeto")
+private List tarefas;
+```
 
 ### Front-end
-Front-end
 
-- Roda sem erro (npm run start)
-- Tela de login abre
-- Login com credenciais erradas não deixa entrar
-- Login com credenciais certas entra no sistema
-- Logout funciona
+**`Atividades.js` — estado inicial**
 
+```javascript
+// Antes
+this.state = { list: [], carregando: true, erro: null };
 
- ### Teste de usabilidade
-- Acessar o swagger http://localhost:8080/swagger-ui/index.html
-- Realizar autenticação
-- Criar o seguinte projeto e tarefa:
-#### POST /projetos
+// Depois
+this.state = { lista: [], carregando: true, erro: null };
+```
+
+**`Atividades.js` — fetch com autenticação**
+
+```javascript
+// Antes
+const resposta = await fetch("http://localhost:8080/api/atividades");
+
+// Depois
+const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+const token = usuario?.token;
+
+const resposta = await fetch("http://localhost:8080/tarefas", {
+    headers: { "Authorization": `Bearer ${token}` }
+});
+```
+
+**Novos arquivos criados:**
+- `Usuarios.js`
+- `Projetos.js`
+- `UsuarioForm.js`
+- `ProjetoForm.js`
+- `TarefaForm.js`
+
+---
+
+## Melhorias futuras
+
+- Edição e exclusão de projetos, tarefas e usuários pela interface web (atualmente só via Swagger)
+- Persistência com MySQL em produção
+- Tela de recuperação de senha
+- Criar `UsuarioResponseDTO` para não expor campos sensíveis (como senha) nas respostas da API
+
+---
+
+## Checklist de validação
+
+### Back-end
+- [ ] Sobe sem erros no terminal
+- [ ] `localhost:8080` retorna `403 Forbidden` antes do login ✅ (segurança ativa)
+- [ ] Swagger abre em `localhost:8080/swagger-ui/index.html`
+- [ ] Login funciona com as credenciais do `DataInitializer` e gera token JWT
+- [ ] Token autoriza no Swagger corretamente
+- [ ] `GET /usuarios` retorna lista
+- [ ] `GET /projetos` retorna lista
+- [ ] `POST /usuarios` cria novo usuário
+- [ ] Console H2 abre em `localhost:8080/h2-console`
+
+### Front-end
+- [ ] Sobe sem erros (`npm run start`)
+- [ ] Tela de login abre
+- [ ] Credenciais erradas bloqueiam acesso
+- [ ] Credenciais corretas entram no sistema
+- [ ] Logout funciona
+
+---
+
+## Teste de usabilidade
+
+Após autenticar no Swagger (`localhost:8080/swagger-ui/index.html`), crie os seguintes registros:
+
+**POST `/projetos`**
 ```json
 {
   "nome": "Projeto teste",
@@ -424,14 +300,11 @@ Front-end
   "dataInicio": "2026-04-18",
   "dataConclusao": "2026-04-18",
   "status": "ATIVO",
-  "usuario": {
-    "id": 1
-  }
+  "usuario": { "id": 1 }
 }
 ```
 
-
-#### POST /tarefas
+**POST `/tarefas`**
 ```json
 {
   "titulo": "Tarefa teste",
@@ -440,131 +313,221 @@ Front-end
   "dataConclusao": "2026-04-18",
   "prioridade": "BAIXA",
   "status": "PENDENTE",
-  "projeto": {
-    "id": 1
-  },
-  "usuario": {
-    "id": 1
-  }
+  "projeto": { "id": 1 },
+  "usuario": { "id": 1 }
 }
 ```
 
+---
 
+## Glossário
 
-## Mudanças no projeto original
- - antes e depois
+### Node.js e NVM
 
-## Back-end
+**Node.js** é o programa em si — o runtime necessário para rodar o front-end.
 
-### `SecurityConfig.java`
+**NVM (Node Version Manager)** é um gerenciador que permite ter várias versões do Node instaladas e alternar entre elas conforme o projeto.
 
-**Antes:**
-```java
-http.csrf(csrf -> csrf.disable())
+---
+
+### API
+
+É o sistema inteiro — o back-end construído em Spring Boot que recebe e responde às requisições.
+
 ```
-
-**Depois:**
-```java
-http.cors(cors -> cors.configure(http))
-    .csrf(csrf -> csrf.disable())
+API = localhost:8080  (o restaurante inteiro)
 ```
 
 ---
 
-### `CorsConfig.java`
+### Endpoint
 
-**Antes:**
-```java
-.allowedOrigins("http://localhost:5173")
+End = fim, Point = ponto — é o ponto final do caminho de uma requisição.
+
+É cada "porta de entrada" específica da API: a combinação de **verbo HTTP + rota**. É como cada prato do cardápio do restaurante.
+
+```
+GET  /projetos   → um endpoint
+POST /projetos   → outro endpoint diferente
+GET  /usuarios
+POST /login
 ```
 
-**Depois:**
-```java
-.allowedOrigins("http://localhost:5173", "http://localhost:3000")
+`/projetos` sozinho não é um endpoint completo — é só uma rota. Para ser um endpoint, precisa do verbo:
+
+```
+localhost:8080  +  /projetos  +  GET
+      │                │            │
+  endereço          caminho        ação
+  do servidor        (rota)       (verbo)
+```
+
+- **API** = a cidade inteira
+- **Endpoint** = o endereço específico que você quer chegar
+- **Verbo HTTP** = o que você vai fazer lá (buscar, criar, deletar)
+
+---
+
+### JWT (JSON Web Token)
+
+Formato de token gerado pelo servidor no momento do login. Ele carrega as informações do usuário e tem prazo de validade.
+
+Quando o usuário faz novas requisições, o front já guardou o token e o envia para o back, provando que o usuário está autenticado — sem precisar informar a senha novamente a cada requisição.
+
+---
+
+### Controllers
+
+Na pasta `controllers`, as classes `ProjetoController`, `UsuarioController` e `TarefaController` cuidam do CRUD — criar, listar, editar e deletar dados.
+
+#### AuthController
+
+Cuida só do login: recebe email e senha, valida no banco e gera o token JWT.
+
+A diferença principal é que o `AuthController` é a **porta de entrada do sistema** — é a única rota que não precisa de token para ser acessada. Todas as outras rotas exigem autenticação.
+
+---
+
+### DTO (Data Transfer Object)
+
+```
+dto/
+├── LoginRequestDTO.java
+└── UsuarioResponseDTO.java
+```
+
+Classe que limita quais dados são transferidos numa operação — tanto do front para o back quanto do back para o front.
+
+**LoginRequestDTO** — do front para o back. Quando o usuário faz login, o front envia apenas email e senha. Essa classe é usada nos controllers via `@RequestBody`, que pega o JSON da requisição e transforma no objeto DTO para autenticar o usuário e gerar o token JWT.
+
+**UsuarioResponseDTO** — do back para o front. Se o front pede para listar dados de um usuário — que tem nome, CPF, senha e data de criação no banco — o back retorna apenas nome e email, sem expor a senha e outros dados sensíveis.
+
+**Fluxo front → back:**
+
+```
+Front manda JSON com email e senha
+           ↓
+AuthController recebe com @RequestBody LoginRequestDTO
+           ↓
+LoginRequestDTO carrega só esses dois campos
+           ↓
+Service valida no banco e gera o token JWT
 ```
 
 ---
 
-### `Projeto.java`
+### Config (SecurityConfig)
 
-**Antes:**
+Pensando em LGPD e segurança, a maioria das rotas é protegida.
+
+Na pasta `config`, o `SecurityConfig` limita as rotas acessíveis. O login e o Swagger são liberados — sem isso, ninguém conseguiria logar nem testar a aplicação. Qualquer outra rota exige token JWT gerado após o login.
+
 ```java
-@OneToMany(mappedBy = "projeto")
-private List tarefas;
+.anyRequest().authenticated()
 ```
 
-**Depois:**
+Antes de qualquer requisição, o `JwtFilter` intercepta e valida o token. Se for inválido ou inexistente, a requisição é barrada:
+
 ```java
-@JsonIgnore
-@OneToMany(mappedBy = "projeto")
-private List tarefas;
+.addFilterBefore(jwtFilter, ...)
+```
+
+**Fluxo ao acessar sem autenticação:**
+
+```
+Você abre localhost:8080 sem estar autenticado
+           ↓
+SecurityConfig barra a requisição
+           ↓
+Servidor responde 403 Forbidden
 ```
 
 ---
 
-## Front-end
+### Annotations
 
-### `Atividades.js` — estado inicial
+#### `@PathVariable`
 
-**Antes:**
-```javascript
-this.state = {
-    list: [],
-    carregando: true,
-    erro: null,
-};
+Pega um valor que está dentro da URL e passa para dentro do método.
+
+```java
+@GetMapping("/usuarios/{id}")
+public Usuario buscar(@PathVariable Long id) {
+    return repository.findById(id);
+}
 ```
 
-**Depois:**
-```javascript
-this.state = {
-    lista: [],
-    carregando: true,
-    erro: null,
-};
-```
+Se você acessar `/usuarios/5`, o `{id}` da URL é capturado pelo `@PathVariable` e o método busca o usuário de id 5.
 
 ---
 
-### `Atividades.js` — fetch
+#### `@RequestBody`
 
-**Antes:**
-```javascript
-const resposta = await fetch(
-    "http://localhost:8080/api/atividades"
-);
+Pega os dados que vieram no corpo da requisição. Quando o front manda um JSON com os dados do projeto, o Spring captura esse JSON e transforma no objeto Java correspondente.
+
+```java
+@PostMapping
+public Projeto salvar(@RequestBody Projeto projeto) {
+    return service.salvar(projeto);
+}
 ```
 
-**Depois:**
-```javascript
-const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
-const token = usuario?.token;
+Quando o front faz um POST para criar um projeto, ele envia um JSON assim:
 
-const resposta = await fetch(
-    "http://localhost:8080/tarefas",
-    {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    }
-);
+```json
+{
+  "nome": "Projeto X",
+  "descricao": "..."
+}
 ```
 
- Criamos código em Usuarios.js
+O `@RequestBody` captura esse JSON e transforma no objeto `Projeto`.
 
+---
 
- 
-## Melhorias
+#### Mapeamentos HTTP
 
-- Edição e exclusão pelo site (atualmente só pelo Swagger)
-- Persistência com MySQL em produção
-- Tela de recuperação de senha
-- Criamos os arquivos
-Usuarios.js
-Projetos.js
-UsuarioForm.js
-ProjetoForm.js
-TarefaForm.js
+```java
+@GetMapping    // GET    — buscar dados
+@PostMapping   // POST   — criar dados
+@PutMapping    // PUT    — editar dados
+@DeleteMapping // DELETE — deletar dados
+```
 
+Exemplos:
 
-No projeto atual, o back retorna o objeto Usuario completo. Uma melhoria seria criar um UsuarioResponseDTO pra não expor campos sensíveis como a senha nas respostas
+```java
+@GetMapping("/projetos")
+public List<Projeto> listar() { ... }
+// GET localhost:8080/projetos
+
+@PostMapping("/projetos")
+public Projeto salvar(@RequestBody Projeto projeto) { ... }
+// POST localhost:8080/projetos
+```
+
+- `@GetMapping("/projetos")` → quando alguém fizer um GET nesse endereço, executa o método `listar`
+- `@PostMapping("/projetos")` → quando alguém fizer um POST nesse endereço, executa o método `salvar`
+
+---
+
+### Optional
+
+Serve para evitar `NullPointerException` — erro que ocorre quando você tenta usar um objeto que não existe (é `null`).
+
+**Sem Optional:**
+```java
+Usuario usuario = repository.findByEmail("joao@email.com");
+usuario.getNome(); // ERRO se não encontrar — objeto é null
+```
+
+**Com Optional:**
+```java
+Optional<Usuario> usuario = repository.findByEmail("joao@email.com");
+
+if (usuario.isPresent()) {
+    usuario.get().getNome(); // seguro — usuário existe
+} else {
+    throw new Exception("Usuário não encontrado"); // trata o caso de não encontrar
+}
+```
