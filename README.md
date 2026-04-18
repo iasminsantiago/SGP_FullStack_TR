@@ -489,9 +489,11 @@ Os verbos estão "dentro"/fazem parte da rota. Em usuários, temos 5 verbos poss
 
 ### Endpoint
 Combinação de URL base + rota + verbo HTTP.
-É o destino final de uma requisição.
 
-End = fim, Point = ponto — é o ponto final do caminho de uma requisição.
+End = fim, Point = ponto — é o destino final de uma requisição.
+
+URL base  +  rota        +  verbo
+localhost:8080  /tarefas    GET
 
 
 `/projetos` sozinho não é um endpoint completo — é só uma rota. Para ser um endpoint, precisa do verbo:
@@ -502,6 +504,33 @@ localhost:8080  +  /projetos  +  GET
   endereço          caminho        ação
   do servidor        (rota)       (verbo)
 ```
+
+Exemplos:
+- `GET /tarefas` → lista todas as tarefas
+- `POST /tarefas` → cria uma nova tarefa (recebe JSON com os dados no corpo)
+- `GET /tarefas/{id}` → busca uma tarefa específica pelo id
+
+> 💡 `/tarefas` sozinho é só uma rota.
+> Para ser um endpoint, precisa do verbo: `GET /tarefas` é um endpoint.
+
+---
+
+### API
+O sistema back-end completo. É o conjunto de todos os endpoints disponíveis.
+Exemplo: `localhost:8080` é a URL base da nossa API.
+
+---
+
+### Verbo HTTP
+Define a ação a ser executada no endpoint:
+
+| Verbo | Ação |
+|---|---|
+| GET | Buscar dados |
+| POST | Criar dados |
+| PUT | Atualizar dados |
+| DELETE | Deletar dados |
+
 
 - **API** = a cidade inteira
 - **Endpoint** = o endereço específico que você quer chegar
