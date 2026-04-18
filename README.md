@@ -198,6 +198,60 @@ SGP-API/
 
 ---
 
+## Arquitetura front-end
+´´´
+## Estrutura do Front-end
+
+```
+sgp-react-js/
+└── src/
+    ├── assets/
+    │   ├── css/
+    │   └── img/                        # Imagens e logos
+    │
+    ├── components/
+    │   └── MenuTopo.js                 # Barra de navegação com menu e logout
+    │
+    ├── context/
+    │   └── GlobalContext.js            # Contexto global — guarda usuário logado e token
+    │
+    ├── pages/
+    │   ├── Atividades/
+    │   │   ├── Atividades.js           # Listagem de tarefas
+    │   │   ├── Atividades.css
+    │   │   └── TarefaForm.js           # Formulário de cadastro de tarefa ✨ novo
+    │   │
+    │   ├── Dashboard/
+    │   │   ├── Dashboard.js            # Dashboard com gráficos
+    │   │   └── Dashboard.css
+    │   │
+    │   ├── Login/
+    │   │   ├── Login.js                # Tela de login
+    │   │   └── Login.css
+    │   │
+    │   ├── Page404/
+    │   │   └── Page404.js              # Página de erro 404
+    │   │
+    │   ├── Projetos/
+    │   │   ├── Projetos.js             # Listagem de projetos ✨ novo
+    │   │   └── ProjetoForm.js          # Formulário de cadastro de projeto ✨ novo
+    │   │
+    │   └── Usuarios/
+    │       ├── USuarios.js             # Listagem de usuários ✨ novo
+    │       └── UsuarioForm.js          # Formulário de cadastro de usuário ✨ novo
+    │
+    ├── routes/
+    │   └── Rotas.js                    # Definição de todas as rotas do front
+    │
+    ├── services/
+    │   └── auth.js                     # Funções de autenticação (pega usuário do localStorage)
+    │
+    ├── App.js                          # Componente raiz
+    └── index.js                        # Entrada da aplicação
+```
+
+´´´
+
 ## Mudanças em relação ao projeto original
 
 ### Back-end
